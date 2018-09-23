@@ -1,0 +1,11 @@
+.center-form {
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
+	flex-wrap: nowrap !important;
+	background-color: green !important;
+	margin-top: 30vh !important;
+}
+.center {
+	text-align: center;
+}
