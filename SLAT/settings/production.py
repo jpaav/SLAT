@@ -10,3 +10,5 @@ if os.environ['DEBUG'].lower() in ['true', 't', 'y', 'yes']:
 	DEBUG = True
 else:
 	DEBUG = False
+
+ALLOWED_HOSTS += ['slat-backend.herokuapp.com']

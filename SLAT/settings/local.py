@@ -12,4 +12,4 @@ DATABASES['default'] = {
 	'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 }
 
-ALLOWED_HOSTS += ['.herokuapp.com', 'slat-backend.herokuapp.com', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS += ['127.0.0.1', '0.0.0.0']
