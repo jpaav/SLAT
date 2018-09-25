@@ -9,6 +9,7 @@ dj-database-url = "*"
 "psycopg2-binary" = "*"
 djangorestframework = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
