@@ -17,7 +17,10 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Book(models.Model):
 	def __str__(self):
-		return self.title
+		if self.title is None:
+			return 'None'
+		else:
+			return self.title
 
 	objects = models.Manager()
 	title = models.CharField(max_length=256, blank=True, null=True)
@@ -50,6 +53,13 @@ class Book(models.Model):
 
 
 class Transaction(models.Model):
+	def __str__(self):
+		res = ''
+		if self.book.title is None:
+			res += 'None: '
+		else:
+			res += self.title + ': '
+		return res
 	objects = models.Manager()
 	book = models.ForeignKey(
 		Book,
