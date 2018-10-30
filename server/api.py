@@ -32,7 +32,11 @@ class BookTransactions(generics.ListCreateAPIView):
 			return None
 
 	def perform_create(self, serializer):
-		return serializer.save(authorizer=self.request.user, checkout=datetime.now(), checkin=None)
+		try:
+			book = self.request.GET.get('book_pk')
+			return serializer.save(book=book, authorizer=self.request.user, checkout=datetime.now(), checkin=None)
+		except Book.DoesNotExist:
+			return None  # idk how this behaves....
 
 
 class Transaction(generics.RetrieveUpdateDestroyAPIView):
