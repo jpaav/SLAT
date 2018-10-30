@@ -32,8 +32,9 @@ server_patterns = [
 
 api_patterns = [
 	path('api/books/', api.BookList.as_view()),
-	path('api/book/<int:pk>', api.Book.as_view()),
-	path('api/transactions/', api.BookTransactions.as_view()),
+	path('api/book/<int:book_pk>', api.Book.as_view()),
+	path('api/book/<int:book_pk>/transactions/', api.BookTransactions.as_view()),
+	# path('api/book/<int:pk>/latest_transaction/', api.BookTransactions.as_view()),
 	path('api/transaction/', api.Transaction.as_view()),
 	path('api-token-auth/', rest_auth_views.obtain_auth_token),
 ]

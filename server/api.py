@@ -15,7 +15,7 @@ class Book(generics.RetrieveUpdateDestroyAPIView):
 	permission_classes = (permissions.IsAuthenticated,)
 
 	def get_object(self):
-		pk = self.kwargs.get('pk')
+		pk = self.kwargs.get('book_pk')
 		return Book.objects.get(pk=pk)
 
 
@@ -25,11 +25,14 @@ class BookTransactions(generics.ListCreateAPIView):
 	permission_classes = (permissions.IsAuthenticated,)
 
 	def get_queryset(self):
-		book = self.request.GET.get('book')
+		book = self.request.GET.get('book_pk')
 		if book is not None:
 			return Transaction.objects.filter(book=book)
 		else:
 			return None
+
+	def perform_create(self, serializer):
+		return serializer.save(authorizer=self.request.user, checkout=datetime.now(), checkin=None)
 
 
 class Transaction(generics.RetrieveUpdateDestroyAPIView):

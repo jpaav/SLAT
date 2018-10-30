@@ -51,6 +51,11 @@ class Book(models.Model):
 			return t
 		return None
 
+	def is_active(self):
+		if self.transaction_set.first().checkout is not None and self.transaction_set.first().checkin is None:
+			return True
+		return False
+
 
 class Transaction(models.Model):
 	def __str__(self):
