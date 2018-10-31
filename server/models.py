@@ -30,7 +30,7 @@ class Book(models.Model):
 
 	def checkout(self, user, first_name, last_name):
 		# Check if the latest transaction has been checked back in
-		if not self.transaction_set.order_by('-checkout')[0].is_active():
+		if not self.transaction_set.order_by('-checkout')[0].is_checked_out():
 			# Add a new one and check them out
 			t = self.transaction_set.create(
 				book=self,
@@ -46,12 +46,14 @@ class Book(models.Model):
 	def checkin(self):
 		# Check if the latest transaction has NOT been checked back in
 		t = self.transaction_set.order_by('-checkout')[0]
-		if t.is_active():
+		if t.is_checked_out():
 			t.checkin = datetime.now()
 			return t
 		return None
 
-	def is_active(self):
+	def is_checked_out(self):
+		if self.transaction_set.count() == 0:
+			return False
 		if self.transaction_set.first().checkout is not None and self.transaction_set.first().checkin is None:
 			return True
 		return False

@@ -4,7 +4,7 @@ from .models import *
 
 
 class BookSerializer(serializers.ModelSerializer):
-	checked_out = serializers.CharField(source='is_active')
+	checked_out = serializers.CharField(source='is_checked_out')
 
 	class Meta:
 		model = Book
@@ -13,7 +13,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-	checked_out = serializers.CharField(source='is_active')
+	checked_out = serializers.CharField(source='is_checked_out')
 
 	class Meta:
 		model = Transaction
